@@ -1,0 +1,22 @@
+@startuml
+Mike -> Bob: Authentication Request
+Bob --> Mike: Authentication Response
+
+Mike -> Bob: Another authentication Request
+Mike <-- Bob: another authentication Response
+
+Mike -> Bob: Another authentication Request
+Mike <-- Bob: another authentication Response
+
+Mike -> Bob: Another authentication Request
+Mike <-- Bob: another authentication Response
+
+Mike -> Bob: Another authentication Request
+Mike <-- Bob: another authentication Response
+
+Mike -> Bob: Another authentication Request
+Mike <-- Bob: another authentication Response
+
+Mike -> Bob: Another authentication Request
+Mike <-- Bob: another authentication Response
+@enduml
