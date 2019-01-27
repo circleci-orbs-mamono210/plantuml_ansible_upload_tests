@@ -1,7 +1,7 @@
 version: 2.1
 
 orbs:
-  plantuml: orbss/plantuml@0.4.60
+  plantuml: orbss/plantuml@0.4.76
   ansible: orbss/ansible_upload@0.2.8
 
 workflows:
@@ -10,13 +10,29 @@ workflows:
     jobs:
       - plantuml/generate-svg:
           updated_files_only: false
-          extension: ".uml"
+          persist_to_workspace: true
+          workspace_root: /tmp/circleci_workspace
+          workspace_path: .
+
+      - plantuml/generate-png:
+          requires:
+            - plantuml/generate-svg
+          updated_files_only: false
+          persist_to_workspace: true
+          workspace_root: /tmp/circleci_workspace
+          workspace_path: .
+
+      - plantuml/generate-utxt:
+          requires:
+            - plantuml/generate-png
+          updated_files_only: false
+          persist_to_workspace: true
           workspace_root: /tmp/circleci_workspace
           workspace_path: .
 
       - ansible/upload-files:
           requires:
-            - plantuml/generate-svg
+            - plantuml/generate-utxt
           context: Sakura-VPS1
           upload_dir: "/var/www/html/plantuml"
           fingerprints: 45:71:32:cd:b0:39:88:82:0e:6a:e6:49:9c:ae:60:a1
